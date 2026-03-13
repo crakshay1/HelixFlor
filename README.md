@@ -13,7 +13,7 @@ The GBOT database contains 6 plant genomes, all of which contain the official an
 
 1. Applying and understanding Helixer on genomes not yet annotated
 
-2. Doing a global comparison on each genome ([A comparison was already done before.](https://github.com/crakshay1/HelixFlor/GBOT2025)) 
+2. Doing a global comparison on each genome ([A comparison was already done before.](https://github.com/crakshay1/HelixFlor/tree/main/GBOT2025)) 
 
 3. Targeting new genes defined by Helixer and highlight their characteristics on the structural side (gene size, number of exons) and functional side (generated protein and functional annotation)
 
