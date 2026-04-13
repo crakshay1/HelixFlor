@@ -9,7 +9,7 @@ Although high-throughput sequencing provides access to complete genomes, the str
 
 ## Objective of the Internship
 
-The GBOT database contains 6 plant genomes, all of which contain the official annotation of these genomes plus for some the annotation generated after the use of Helixer (Stiehler et al. 2021), an annotation tool that combines deep neural networks and HMM-type models to predict gene models from the genomic sequence alone. The internship consists in :
+The GBOT database contains 6 plant genomes, all of which contain the official annotation of these genomes, plus for some, the annotation generated after the use of Helixer (Stiehler et al. 2021), an annotation tool that combines deep neural networks and HMM-type models to predict gene models from the genomic sequence alone. The internship consists in :
 
 1. Applying and understanding Helixer on genomes not yet annotated
 
