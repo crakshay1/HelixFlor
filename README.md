@@ -22,11 +22,3 @@ The GBOT database contains 6 plant genomes, all of which contain the official an
 
 
 ⚠️ Special thanks to **Franck SAMSON**, my internship tutor.
-
----
-
-## 🖥️ What's GBOT?
-
----
-
-## 🧬 What's Helixer?
