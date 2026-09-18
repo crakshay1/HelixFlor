@@ -1,0 +1,29 @@
+Pour BlastN
+______________________
+blastn -query {dir}/seqs/B73_DNA.fasta -db 'Projet/B73_TES/zea_mays_TEs' -out {dir}/B73_TEs_results.tsv \
+    -outfmt '6 qseqid sseqid pident length qcovs evalue bitscore'
+
+
+Pour BlastP
+______________________
+blastp -query {fasta_file} -db 'Projet/Uniprot/swissprot' -out {dir}/results_{type}.tsv \
+              -outfmt '6 qseqid sseqid pident length qcovs evalue bitscore' -matrix BLOSUM45 \
+              -num_threads 12 -evalue 1e-5 -max_target_seqs 5
+
+Pour EggNOG 
+______________________
+emapper.py  --data_dir /shared/ifbstor1/galaxy/mutable-data/tool-data/eggnog_data/5.0.2 -m diamond -i /shared/ifbstor1/galaxy/datasets2/c/b/c/dataset_cbc66b7f-365f-4d74-9ec1-3dae5f3f4aad.dat --itype proteins --matrix BLOSUM62 --gapopen 11 --gapextend 1 --sensmode sensitive --dmnd_iterate no --score 0.001 --seed_ortholog_evalue 0.001 --target_orthologs=all --go_evidence=non-electronic --no_file_comments --output=results --cpu 8 --scratch_dir /tmp/slurm_galaxy_66321919.tmp --temp_dir /tmp/slurm_galaxy_66321919.tmp
+eggnog-mapper@2.1.13/bin/diamond blastp -d '/shared/galaxy/mutable-data/tool-data/eggnog_data/5.0.2/eggnog_proteins.dmnd' -q '/shared/galaxy/datasets2/c/b/c/dataset_cbc66b7f-365f-4d74-9ec1-3dae5f3f4aad.dat' --threads 8 -o '/tmp/slurm_galaxy_66321919.tmp/results.emapper.hits' --tmpdir '/tmp/slurm_galaxy_66321919.tmp/emappertmp_dmdn_p496yq8f' --sensitive -e 0.001 --min-score 0.001 --matrix BLOSUM62 --gapopen 11 --gapextend 1 --top 3  --outfmt 6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore qcovhsp scovhsp
+
+Pour Helixer
+______________________
+Helixer.py \
+  --fasta genome.fasta \
+  --lineage land_plant \
+  --species ZeaMays \
+  --gff-output predictions.gff \
+  --window-size 100 \
+  --edge-threshold 0.1 \
+  --peak-threshold 0.8 \
+  --min-coding-length 100
+HelixerPost genome.h5 predictions.h5 100 0.1 0.8 100 output.gff
