@@ -1,0 +1,31 @@
+    'getAllFeatsForSequence' : # Récupération de la liste de tous les features d'un certain type d'une séquence donnée
+    """
+        SELECT json_agg(t)
+        FROM (
+            SELECT f.id, f.id_feat, f.start, f.stop, f.complement, s.name,
+            (SELECT ARRAY[array_agg(start order by start), array_agg(stop order by stop )] FROM $schema$locations where feature_id=f.id) as location
+            FROM $schema$features f, $schema$sequences s WHERE f.sequence_id = $id$ AND f.type = '$type$' AND s.id = f.sequence_id
+        ) t;
+    """,
+    'getAllFeatsForSpecies' : # Récupération de la liste de tous les features d'un certain type d'une espèce donnée
+    """
+        SELECT json_agg(t)
+        FROM (
+            SELECT f.id, f.id_feat, f.start, f.stop, f.complement, s.name,
+            (GREATEST(f.stop, f.start) - LEAST(f.stop, f.start)) AS length,
+            (SELECT COUNT(*) FROM $schema$locations WHERE feature_id=f.id) as exons,
+            (SELECT ARRAY[array_agg(start order by start), array_agg(stop order by stop )] FROM $schema$locations where feature_id=f.id) as location
+            FROM $schema$features f JOIN $schema$sequences s ON f.sequence_id = s.id WHERE s.species_id = $id$ AND f.type = '$type$'
+        ) t;
+    """,
+    'getFeatByIdfAndType' : # Récupération d'un feat en fonction de son id_feat et de son type
+    """
+        SELECT row_to_json(t)
+        FROM (            
+            SELECT f.id, f.id_feat, f.start, f.stop, f.complement, s.name, s.id as id_seq, 
+            (GREATEST(f.stop, f.start) - LEAST(f.stop, f.start)) AS length,
+            (SELECT COUNT(*) FROM $schema$locations WHERE feature_id=f.id) as exons,
+            (SELECT ARRAY[array_agg(start order by start), array_agg(stop order by stop )] FROM $schema$locations where feature_id=f.id) as location
+            FROM $schema$features f, $schema$sequences s WHERE f.id_feat = '$idf$' AND f.type = '$type$' AND s.id = f.sequence_id AND s.species_id = $sp$
+        ) t;
+    """,
